@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Passenger Information</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    header {
+      background: #0077cc;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+      flex: 1;
+    }
+    
+    .form-container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    
+    .form-header {
+      background: linear-gradient(135deg, #0077cc, #005fa3);
+      color: white;
+      padding: 25px 30px;
+      text-align: center;
+    }
+    
+    .form-header h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    
+    .form-header p {
+      opacity: 0.9;
+      font-size: 16px;
+    }
+    
+    .flight-summary {
+      background: #f8f9fa;
+      padding: 20px 30px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+    }
+    
+    .flight-summary img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: contain;
+      background: #f1f1f1;
+      padding: 5px;
+      margin-right: 20px;
+    }
+    
+    .flight-info h3 {
+      color: #0077cc;
+      margin-bottom: 5px;
+    }
+    
+    .flight-info p {
+      color: #555;
+      font-size: 14px;
+    }
+    
+    .price-tag {
+      margin-left: auto;
+      background: #0077cc;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+    
+    .form-body {
+      padding: 30px;
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+    }
+    
+    .input-group {
+      position: relative;
+    }
+    
+    .input-group i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 15px 15px 15px 45px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+    
+    .form-control:focus {
+      border-color: #0077cc;
+      box-shadow: 0 0 0 3px rgba(0, 119, 204, 0.1);
+      outline: none;
+    }
+    
+    .form-row {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .form-row .form-group {
+      flex: 1;
+    }
+    
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+    
+    .btn {
+      padding: 14px 28px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+    
+    .btn-primary {
+      background: #0077cc;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #005fa3;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 119, 204, 0.3);
+    }
+    
+    .btn-secondary {
+      background: #f0f0f0;
+      color: #333;
+    }
+    
+    .btn-secondary:hover {
+      background: #e0e0e0;
+    }
+    
+    .progress-bar {
+      height: 6px;
+      background: #eee;
+      margin-bottom: 30px;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    
+    .progress {
+      height: 100%;
+      width: 66.66%;
+      background: linear-gradient(90deg, #0077cc, #00a8ff);
+      border-radius: 3px;
+    }
+    
+    .step-indicator {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+    
+    .step {
+      text-align: center;
+      flex: 1;
+      position: relative;
+    }
+    
+    .step:not(:last-child):after {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background: #ddd;
+      z-index: -1;
+    }
+    
+    .step.completed:not(:last-child):after {
+      background: #0077cc;
+    }
+    
+    .step-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #ddd;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 8px;
+      font-weight: bold;
+    }
+    
+    .step.completed .step-circle {
+      background: #0077cc;
+    }
+    
+    .step.active .step-circle {
+      background: #0077cc;
+      box-shadow: 0 0 0 3px rgba(0, 119, 204, 0.2);
+    }
+    
+    .step-title {
+      font-size: 14px;
+      color: #777;
+    }
+    
+    .step.active .step-title {
+      color: #0077cc;
+      font-weight: 600;
+    }
+    
+    .notification {
+      background: #e7f5ff;
+      border-left: 4px solid #0077cc;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .notification p {
+      margin: 0;
+      color: #0c5aa6;
+    }
+    
+    @media (max-width: 768px) {
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      
+      .flight-summary {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .flight-summary img {
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+      
+      .price-tag {
+        margin-left: 0;
+        margin-top: 15px;
+        align-self: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Complete Your Booking</h1>
+  </header>
+
+  <div class="container">
+    <div class="progress-bar">
+      <div class="progress"></div>
+    </div>
+    
+    <div class="step-indicator">
+      <div class="step completed">
+        <div class="step-circle"><i class="fas fa-check"></i></div>
+        <div class="step-title">Select Flight</div>
+      </div>
+      <div class="step active">
+        <div class="step-circle">2</div>
+        <div class="step-title">Passenger Info</div>
+      </div>
+      <div class="step">
+        <div class="step-circle">3</div>
+        <div class="step-title">Confirmation</div>
+      </div>
+    </div>
+    
+    <div class="form-container">
+      <div class="form-header">
+        <h1>Passenger Information</h1>
+        <p>Please provide your details to complete the booking</p>
+      </div>
+      
+      <div class="flight-summary">
+        <img id="airlineLogo" src="" alt="Airline Logo">
+        <div class="flight-info">
+          <h3 id="flightName">Flight Name</h3>
+          <p id="flightRoute">Route</p>
+          <p id="flightTime">Time</p>
+        </div>
+        <div class="price-tag" id="flightPrice">BDT 0</div>
+      </div>
+      
+      <div class="form-body">
+        <div class="notification">
+          <p><i class="fas fa-info-circle"></i> Please enter your details exactly as they appear on your travel documents.</p>
+        </div>
+        
+        <form id="passengerForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="firstName" class="form-control" placeholder="John" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="lastName" class="form-control" placeholder="Doe" required>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <div class="input-group">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="email" class="form-control" placeholder="john.doe@example.com" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <div class="input-group">
+                <i class="fas fa-phone"></i>
+                <input type="tel" id="phone" class="form-control" placeholder="+880 1XXX XXXXXX" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="nationality">Nationality</label>
+              <div class="input-group">
+                <i class="fas fa-flag"></i>
+                <select id="nationality" class="form-control" required>
+                  <option value="">Select Nationality</option>
+                  <option value="bangladeshi">Bangladeshi</option>
+                  <option value="indian">Indian</option>
+                  <option value="pakistani">Pakistani</option>
+                  <option value="american">American</option>
+                  <option value="british">British</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="passport">Passport Number</label>
+            <div class="input-group">
+              <i class="fas fa-passport"></i>
+              <input type="text" id="passport" class="form-control" placeholder="AB1234567" required>
+            </div>
+          </div>
+          
+          <div class="btn-container">
+            <a href="javascript:history.back()" class="btn btn-secondary">
+              <i class="fas fa-arrow-left"></i> Back
+            </a>
+            <button type="submit" class="btn btn-primary">
+              Continue to Payment <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Get flight data from URL
+    const params = new URLSearchParams(window.location.search);
+    const flightJSON = params.get("flight");
+    let flight;
+
+    try {
+        flight = JSON.parse(decodeURIComponent(flightJSON));
+        
+        // Update flight summary
+        document.getElementById('airlineLogo').src = `https://content.airhex.com/content/logos/airlines_${flight.carrierCode}_200_200_s.png`;
+        document.getElementById('airlineLogo').onerror = function() {
+            this.src = `https://via.placeholder.com/80?text=${flight.carrierCode}`;
+        };
+        
+        document.getElementById('flightName').textContent = flight.airlineName;
+        document.getElementById('flightRoute').textContent = `${flight.dep.iataCode} to ${flight.arr.iataCode}`;
+        document.getElementById('flightTime').textContent = `${new Date(flight.dep.at).toLocaleDateString()} - ${flight.duration}`;
+        document.getElementById('flightPrice').textContent = `BDT ${flight.price}`;
+    } catch (e) {
+        console.error("Error parsing flight data:", e);
+    }
+
+    // Handle form submission
+    document.getElementById('passengerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Collect form data
+      const formData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        nationality: document.getElementById('nationality').value,
+        passport: document.getElementById('passport').value
+      };
+      
+      // Combine flight and passenger data
+      const bookingData = {
+        flight: flight,
+        passenger: formData
+      };
+      
+      // Redirect to ticket page with combined data
+      const encodedData = encodeURIComponent(JSON.stringify(bookingData));
+      window.location.href = `../ticket/ticket.html?data=${encodedData}`;
+    });
+  </script>
+</body>
+</html>
