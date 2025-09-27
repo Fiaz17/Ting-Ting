@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Journey Details</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="booking_css.css">
+  <script src="booking.js" defer></script>
+</head>
+<body>
+  <div class="journey-container">
+    <div class="journey-header">
+      <h1 id="journeyTitle">Flight Journey Details</h1>
+      <p id="journeySubtitle">Your selected flight information</p>
+    </div>
+    
+    <div class="journey-tabs">
+      <div class="journey-tab active" onclick="showPanel('timeline')">
+        <i class="fas fa-route"></i> Timeline
+      </div>
+      <div class="journey-tab" onclick="showPanel('map')">
+        <i class="fas fa-map-marked-alt"></i> Route Map
+      </div>
+      <div class="journey-tab" onclick="showPanel('summary')">
+        <i class="fas fa-info-circle"></i> Summary
+      </div>
+    </div>
+    
+    <div class="journey-content">
+      <!-- Timeline Panel -->
+      <div id="timeline-panel" class="journey-panel active">
+        <div class="journey-timeline">
+          <div class="timeline" id="flightTimeline">
+            <!-- Timeline items will be dynamically generated -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Map Panel -->
+      <div id="map-panel" class="journey-panel">
+        <div class="journey-map">
+          <div id="map"></div>
+          <div class="map-overlay">
+            <h3>Route Legend</h3>
+            <div class="map-legend">
+              <div class="legend-item">
+                <div class="legend-color start"></div>
+                <span id="departureLabel">Departure</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color stop"></div>
+                <span id="stopLabel">Stop</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color end"></div>
+                <span id="arrivalLabel">Arrival</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Summary Panel -->
+      <div id="summary-panel" class="journey-panel">
+        <div class="journey-summary">
+          <div class="summary-grid">
+            <div class="summary-card">
+              <i class="fas fa-route"></i>
+              <h3>Journey</h3>
+              <p id="journeyRoute">--</p>
+            </div>
+            <div class="summary-card">
+              <i class="fas fa-exchange-alt"></i>
+              <h3>Stops</h3>
+              <p id="journeyStops">--</p>
+            </div>
+            <div class="summary-card">
+              <i class="fas fa-plane"></i>
+              <h3>Airlines</h3>
+              <p id="journeyAirline">--</p>
+            </div>
+            <div class="summary-card total-time">
+              <i class="fas fa-hourglass-half"></i>
+              <h3>Total Travel Time</h3>
+              <p id="journeyDuration">--</p>
+            </div>
+            <div class="summary-card">
+              <i class="fas fa-suitcase"></i>
+              <h3>Baggage</h3>
+              <p>30kg (Standard)</p>
+            </div>
+            <div class="summary-card">
+              <i class="fas fa-chair"></i>
+              <h3>Class</h3>
+              <p>Economy</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="actions">
+      <button class="purchase-btn" onclick="goToPurchase()">
+        <i class="fas fa-shopping-cart"></i> Purchase
+      </button>
+      <button class="policy-btn" onclick="openPolicy()">
+        <i class="fas fa-file-contract"></i> View Policy
+      </button>
+    </div>
+  </div>
+
+  <!-- Policy Panel -->
+  <div class="overlay" id="overlay" onclick="closePolicy()"></div>
+  <div class="policy-panel" id="policyPanel">
+    <div class="policy-header">
+      <h2><i class="fas fa-info-circle"></i> Flight Booking Policy</h2>
+      <button class="close-btn" onclick="closePolicy()">×</button>
+    </div>
+    
+    <div class="policy-content">
+      <h3>Refund Policy</h3>
+      <p>All flights are refundable according to the following conditions:</p>
+      <ul>
+        <li>Cancellations made more than 24 hours before departure: Full refund</li>
+        <li>Cancellations made within 24 hours of departure: 50% refund</li>
+        <li>No-shows: No refund</li>
+      </ul>
+      
+      <h3>Baggage Policy</h3>
+      <p>Standard baggage allowance includes:</p>
+      <ul>
+        <li>Carry-on: 7kg</li>
+        <li>Checked baggage: 30kg</li>
+        <li>Additional baggage: BDT 500 per kg</li>
+      </ul>
+      
+      <h3>Check-in Policy</h3>
+      <p>Passengers must check in:</p>
+      <ul>
+        <li>Online: 24 hours to 1 hour before departure</li>
+        <li>At the airport: At least 2 hours before domestic flights, 3 hours before international flights</li>
+      </ul>
+      
+      <h3>Changes and Modifications</h3>
+      <p>Flight changes are subject to availability and may incur additional fees:</p>
+      <ul>
+        <li>Date changes: BDT 1,500 per person</li>
+        <li>Route changes: BDT 2,500 per person</li>
+        <li>Name changes: Not permitted</li>
+      </ul>
+      
+      <h3>Special Assistance</h3>
+      <p>Passengers requiring special assistance should notify us at least 48 hours before departure. This includes:</p>
+      <ul>
+        <li>Wheelchair assistance</li>
+        <li>Special meals</li>
+        <li>Medical equipment</li>
+      </ul>
+      
+      <h3>Travel Insurance</h3>
+      <p>We recommend purchasing travel insurance to cover unexpected events such as:</p>
+      <ul>
+        <li>Trip cancellation or interruption</li>
+        <li>Medical emergencies</li>
+        <li>Lost or delayed baggage</li>
+        <li>Flight delays or cancellations</li>
+      </ul>
+      
+      <h3>Terms and Conditions</h3>
+      <p>By booking with us, you agree to the following terms:</p>
+      <ul>
+        <li>All passengers must carry valid travel documents</li>
+        <li>It is the passenger's responsibility to ensure they meet visa requirements</li>
+        <li>The airline reserves the right to change schedules without prior notice</li>
+        <li>Passengers should arrive at the airport at least 2 hours before domestic flights and 3 hours before international flights</li>
+      </ul>
+    </div>
+    
+    <div class="policy-footer">
+      <button onclick="closePolicy()">I Understand</button>
+    </div>
+  </div>
+</body>
+</html>
