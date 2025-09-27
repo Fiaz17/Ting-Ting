@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TING TING Flight Booking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-plane"></i>
+                <span>TING TING</span>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Flights</a></li>
+                    <li><a href="#">My Bookings</a></li>
+                    <li><a href="../track/track.html">Track Flight</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <button class="btn btn-outline" id="loginBtn">Login</button>
+                <div class="user-menu" id="userMenu" style="display: none;">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="dropdown" id="userDropdown">
+                        <a href="#"><i class="fas fa-user"></i> My Profile</a>
+                        <a href="#"><i class="fas fa-ticket-alt"></i> My Bookings</a>
+                        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Find Your Perfect Flight</h1>
+                <p>Book flights to hundreds of destinations worldwide with TING TING</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Form -->
+    <section class="search-container container">
+        <div class="search-tabs">
+            <div class="tab active" data-tab="roundtrip">Round Trip</div>
+            <div class="tab" data-tab="oneway">One Way</div>
+            <div class="tab" data-tab="multicity">Multi City</div>
+        </div>
+        
+        <form class="search-form" id="flightSearchForm">
+            <div class="form-group">
+                <label for="origin">From</label>
+                <input type="text" class="form-control" id="origin" placeholder="City or Airport">
+                 <div class="suggestions-box" id="originSuggestions"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="destination">To</label>
+                <input type="text" class="form-control" id="destination" placeholder="City or Airport">
+                 <div class="suggestions-box" id="destinationSuggestions"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="departure">Departure</label>
+                <input type="date" class="form-control" id="departure">
+            </div>
+            
+            <div class="form-group" id="returnGroup">
+                <label for="return">Return</label>
+                <input type="date" class="form-control" id="return">
+            </div>
+            
+            <div class="form-group">
+                <label for="passengers">Passengers</label>
+                <select class="form-control" id="passengers">
+                    <option value="1">1 Passenger</option>
+                    <option value="2">2 Passengers</option>
+                    <option value="3">3 Passengers</option>
+                    <option value="4">4 Passengers</option>
+                    <option value="5">5+ Passengers</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="search-btn">
+                Search Flights <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Book With TING TING?</h2>
+                <p>We offer the best flight booking experience with exclusive features</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3>Best Price Guarantee</h3>
+                    <p>Find the lowest fares with our price comparison technology and special discounts for agents.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Live Flight Tracking</h3>
+                    <p>Track your flight in real-time with our integration with OpenSky Network for accurate flight status.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <h3>Seat Selection</h3>
+                    <p>Choose your preferred seat from our interactive seat map for a comfortable journey.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>E-Ticket Generation</h3>
+                    <p>Receive your e-ticket instantly in PDF format after booking confirmation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Destinations -->
+    <section class="destinations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Popular Destinations</h2>
+                <p>Explore our most booked flight destinations</p>
+            </div>
+            
+            <div class="destinations-grid">
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1934&q=80" alt="New York">
+                    <div class="destination-info">
+                        <h3>New York</h3>
+                        <p>From $199</p>
+                    </div>
+                </div>
+                
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="London">
+                    <div class="destination-info">
+                        <h3>London</h3>
+                        <p>From $249</p>
+                    </div>
+                </div>
+                
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80" alt="Paris">
+                    <div class="destination-info">
+                        <h3>Paris</h3>
+                        <p>From $229</p>
+                    </div>
+                </div>
+                
+                <div class="destination-card">
+                    <img src="https://m.media-amazon.com/images/I/91BxOLGIyoL.jpg" alt="Tokyo">
+                    <div class="destination-info">
+                        <h3>Tokyo</h3>
+                        <p>From $599</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>TING TING</h3>
+                    <p>Your trusted flight booking partner with the best prices and seamless experience.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Flights</a></li>
+                        <li><a href="#">My Bookings</a></li>
+                        <li><a href="#">Track Flight</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Flight Booking</a></li>
+                        <li><a href="#">Travel Insurance</a></li>
+                        <li><a href="#">Airport Transfer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> united international university </li>
+                        <li><i class="fas fa-phone"></i> +1 (123) 456-7890</li>
+                        <li><i class="fas fa-envelope"></i> info@tingtingflights.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; TING TING Flight Booking. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-header">
+                <h2>Login to Your Account</h2>
+                <p>Choose your login method</p>
+            </div>
+            
+            <div class="login-tabs">
+                <div class="login-tab active" data-login="user">User Login</div>
+                <div class="login-tab" data-login="agent">Agent Login</div>
+                <div class="login-tab" data-login="admin">Admin Login</div>
+            </div>
+            
+            <div class="login-form active" id="userLogin">
+                <button class="google-login">
+                    <i class="fab fa-google"></i> Continue with Google
+                </button>
+                
+                <div class="divider">
+                    <span>or</span>
+                </div>
+                
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Email Address">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                </form>
+            </div>
+            
+            <div class="login-form" id="agentLogin">
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Agent Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Agent Login</button>
+                </form>
+            </div>
+            
+            <div class="login-form" id="adminLogin">
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Admin Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Admin Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="suggest place/suggestion.js"></script>
+</body>
+</html>
