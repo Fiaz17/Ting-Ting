@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate E-Ticket</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link rel="stylesheet" href="ticket.css">
+  <script src="ticket.js" defer></script>
+
+
+</head>
+<body>
+  <header>
+    <h1>Generate Your E-Ticket</h1>
+  </header>
+
+  <div class="container">
+    <div class="progress-bar">
+      <div class="progress"></div>
+    </div>
+    
+    <div class="step-indicator">
+      <div class="step completed">
+        <div class="step-circle"><i class="fas fa-check"></i></div>
+        <div class="step-title">Select Flight</div>
+      </div>
+      <div class="step completed">
+        <div class="step-circle"><i class="fas fa-check"></i></div>
+        <div class="step-title">Passenger Info</div>
+      </div>
+      <div class="step active">
+        <div class="step-circle"><i class="fas fa-ticket-alt"></i></div>
+        <div class="step-title">Get Ticket</div>
+      </div>
+    </div>
+    
+    <div class="form-container">
+      <div class="form-header">
+        <h1>Booking Confirmation</h1>
+        <p>Enter the verification code to generate your e-ticket</p>
+      </div>
+      
+      <div class="form-body">
+        <div class="booking-summary">
+          <h2>Booking Summary</h2>
+          <div class="booking-details">
+            <div class="booking-col">
+              <div class="detail-group">
+                <h3>Passenger</h3>
+                <p id="passengerName">-</p>
+              </div>
+              <div class="detail-group">
+                <h3>Email</h3>
+                <p id="passengerEmail">-</p>
+              </div>
+              <div class="detail-group">
+                <h3>Phone</h3>
+                <p id="passengerPhone">-</p>
+              </div>
+            </div>
+            <div class="booking-col">
+              <div class="detail-group">
+                <h3>Flight</h3>
+                <p id="flightName">-</p>
+              </div>
+              <div class="detail-group">
+                <h3>Route</h3>
+                <p id="flightRoute">-</p>
+              </div>
+              <div class="detail-group">
+                <h3>Price</h3>
+                <p id="flightPrice">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="code-section">
+          <h2>Verification Required</h2>
+          <p>Please enter the verification code provided by the admin to generate your e-ticket.</p>
+          <div class="code-input-group">
+            <input type="text" id="verificationCode" class="code-input" placeholder="Enter code" maxlength="10">
+            <button id="verifyBtn" class="verify-btn">Verify</button>
+          </div>
+          <div id="errorMessage" class="error-message">
+            <i class="fas fa-exclamation-circle"></i> Invalid verification code. Please try again.
+          </div>
+          <div id="successMessage" class="success-message">
+            <i class="fas fa-check-circle"></i> Verification successful! Your e-ticket is ready.
+          </div>
+        </div>
+        
+        <div id="ticketSection" class="ticket-section">
+          <div class="ticket-preview" id="ticketPreview">
+            <div class="ticket-header">
+              <h2>E-Ticket</h2>
+              <div class="ticket-number" id="ticketNumber">-</div>
+            </div>
+            <div class="ticket-body">
+              <div class="ticket-col">
+                <div class="ticket-detail">
+                  <h3>PASSENGER</h3>
+                  <p id="ticketPassenger">-</p>
+                </div>
+                <div class="ticket-detail">
+                  <h3>FLIGHT</h3>
+                  <p id="ticketFlight">-</p>
+                </div>
+                <div class="ticket-detail">
+                  <h3>ROUTE</h3>
+                  <p id="ticketRoute">-</p>
+                </div>
+              </div>
+              <div class="ticket-col">
+                <div class="ticket-detail">
+                  <h3>DATE</h3>
+                  <p id="ticketDate">-</p>
+                </div>
+                <div class="ticket-detail">
+                  <h3>TIME</h3>
+                  <p id="ticketTime">-</p>
+                </div>
+                <div class="ticket-detail">
+                  <h3>DURATION</h3>
+                  <p id="ticketDuration">-</p>
+                </div>
+              </div>
+            </div>
+            <div class="ticket-footer">
+              <p>This is an electronic ticket. Please present this ticket along with a valid ID at the airport.</p>
+            </div>
+          </div>
+          <button id="downloadBtn" class="download-btn">
+            <i class="fas fa-download"></i> Download E-Ticket (PDF)
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+</body>
+</html>
